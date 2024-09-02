@@ -1,0 +1,29 @@
+services:
+  my-spring-container-oidc:
+    ports:
+      - "9000:9000"  # 호스트와 컨테이너 간의 포트 매핑
+    container_name: my-spring-container-oidc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      my-network:
+        ipv4_address: 172.22.0.16
+  mysql-container-oidc:
+    ports:
+      - "3307:3306"
+    container_name: mysql-container-oidc
+    image: mysql:latest
+    volumes:
+      - mysql-container-oidc-data:/var/lib/mysql
+    networks:
+      my-network:
+        ipv4_address: 172.22.0.15
+networks:
+  my-network:
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
+volumes:
+  mysql-container-oidc-data:
