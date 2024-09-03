@@ -55,7 +55,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers
-                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                        .contentSecurityPolicy(csp -> csp
+                                .policyDirectives("frame-ancestors 'self' http://localhost:5173")))
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
                 .oauth2Login(a->a
