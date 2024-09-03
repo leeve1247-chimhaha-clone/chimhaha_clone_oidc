@@ -32,6 +32,7 @@ public class SecurityConfig {
         http
                 .exceptionHandling((exceptions) -> exceptions
                         .defaultAuthenticationEntryPointFor(
+                                // login 이 멈추면 이게 없는지 의심해볼것
                                 new LoginUrlAuthenticationEntryPoint("/login"),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                         )
