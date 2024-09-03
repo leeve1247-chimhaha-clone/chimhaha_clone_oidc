@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Remote all" type="docker-deploy" factoryName="docker-compose.yml" folderName="remote" server-name="DockerRemote">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <option name="composeProjectName" value="my-project" />
+        <option name="envFilePath" value="" />
+        <option name="services">
+          <list>
+            <option value="my-spring-container-oidc" />
+            <option value="mysql-container-oidc" />
+          </list>
+        </option>
+        <option name="sourceFilePath" value="docker-compose.yml" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
