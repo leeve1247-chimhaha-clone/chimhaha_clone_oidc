@@ -1,7 +1,5 @@
 services:
   my-spring-container-oidc:
-    ports:
-      - "9000:9000"  # 호스트와 컨테이너 간의 포트 매핑
     container_name: my-spring-container-oidc
     build:
       context: .
