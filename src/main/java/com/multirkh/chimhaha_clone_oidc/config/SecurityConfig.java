@@ -49,6 +49,7 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
         http
+                .requiresChannel(a-> a.anyRequest().requiresSecure())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(
                                 "/","/home", "/login**","/callback/", "/webjars/**", "/error**", "/oauth2/authorization/**"
