@@ -27,6 +27,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attributes = new HashMap<>(originalAttributes);
         System.out.println("attributes = " + attributes);
         String clientName = userRequest.getClientRegistration().getClientName();
+        System.out.println("clientName = " + clientName);
         if (clientName.equals("naver")){
             LinkedHashMap<String, Object> response = (LinkedHashMap<String, Object>) attributes.get("response");
             String id = (String)response.getOrDefault("id", "");
@@ -42,7 +43,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             }
             attributes.put("customId", foundUser.getUserId());
         }
-        else if (clientName.equals("github")) {
+        else if (clientName.equals("GitHub")) {
             UserEntity foundUser = userEntityRepository.findByGithubId(oAuth2User.getName());
             if (foundUser == null) {
                 UserEntity userEntity = new UserEntity();
