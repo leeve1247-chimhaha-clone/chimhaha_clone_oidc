@@ -1,9 +1,9 @@
 package com.multirkh.chimhaha_clone_oidc.custom;
 
-import com.multirkh.chimhaha_clone_oidc.utils.IdGenerator;
 import com.multirkh.chimhaha_clone_oidc.user.UserEntity;
 import com.multirkh.chimhaha_clone_oidc.user.UserEntityRepository;
 import com.multirkh.chimhaha_clone_oidc.user.UserRole;
+import com.multirkh.chimhaha_clone_oidc.utils.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
