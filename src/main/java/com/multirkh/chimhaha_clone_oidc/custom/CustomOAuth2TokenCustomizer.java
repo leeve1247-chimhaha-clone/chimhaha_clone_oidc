@@ -25,7 +25,7 @@ public class CustomOAuth2TokenCustomizer implements OAuth2TokenCustomizer<JwtEnc
             context.getClaims().claims((claims) -> {
                 claims.put("roles", byUserId.getUserRole().toString());
                 Instant iat = (Instant) claims.get("iat");
-                claims.put("exp", iat.plusSeconds(60*5));
+                claims.put("exp", iat.plusSeconds(60 * 5));
             });
         }
     }
