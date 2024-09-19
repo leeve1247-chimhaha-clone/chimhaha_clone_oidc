@@ -2,12 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>로그인 페이지</title>
+    <style>
+        .center-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        a img{
+            width: 200px;
+            height: auto;
+            cursor: pointer;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333;
+                color: #fff;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>로그인</h1>
-<div>
-    With 네이버: <a href="/oauth2/authorization/naver">click here</a>
+<div class = "center-container">
+    <a href="/oauth2/authorization/naver">
+    <img src="btnG_naver.png" alt="login Image">
+</a>
 </div>
 </body>
 </html>
