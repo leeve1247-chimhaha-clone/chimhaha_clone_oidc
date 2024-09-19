@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .requiresChannel(a-> a.anyRequest().requiresSecure()) //https 강제
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(
-                                "/","/home", "/login**","/callback/", "/webjars/**", "/error**", "/oauth2/authorization/**"
+                                "/","/home","/image/**" ,"/login**","/callback/", "/webjars/**", "/error**", "/oauth2/authorization/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
