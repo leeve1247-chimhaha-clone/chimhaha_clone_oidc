@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,8 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.net.URI;
 
 
 @Configuration
@@ -49,17 +52,17 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
         http
-                .requiresChannel(a-> a.anyRequest().requiresSecure()) //https 강제
+                .requiresChannel(a -> a.anyRequest().requiresSecure()) //https 강제
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(
-                                "/","/home","/image/**" ,"/login**","/callback/", "/webjars/**", "/error**", "/oauth2/authorization/**"
+                                "/", "/home", "/image/**", "/login**", "/callback/", "/webjars/**", "/error**", "/oauth2/authorization/**", "/favicon.ico"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
-                .oauth2Login(a->a
-                        .loginPage("/login")
+                .oauth2Login(a -> a
+                                .loginPage("/login")
                                 .permitAll()
                         // .redirectionEndpoint(b->b.baseUri("/callback"))
                 );
