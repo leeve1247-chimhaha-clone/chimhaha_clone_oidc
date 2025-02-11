@@ -38,3 +38,8 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('extractJar', Copy) {
+    from zipTree('build/libs/chimhaha_clone_oidc-0.0.1-SNAPSHOT.jar')
+    into 'build/dependency'
+}

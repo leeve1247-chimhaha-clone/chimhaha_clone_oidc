@@ -5,9 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     networks:
-      my-network:
-        ipv4_address: 172.22.0.16
+      - my-network
   mysql-container-oidc:
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: temp_db
     ports:
       - "3307:3306"
     container_name: mysql-container-oidc
@@ -15,13 +18,9 @@ services:
     volumes:
       - mysql-container-oidc-data:/var/lib/mysql
     networks:
-      my-network:
-        ipv4_address: 172.22.0.15
-networks:
-  my-network:
-    ipam:
-      config:
-        - subnet: 172.22.0.0/16
-          gateway: 172.22.0.1
+      - my-network
 volumes:
   mysql-container-oidc-data:
+networks:
+  my-network:
+    external: true
