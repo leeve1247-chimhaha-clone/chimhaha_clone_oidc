@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,8 +16,6 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.net.URI;
 
 
 @Configuration
@@ -42,8 +40,6 @@ public class SecurityConfig {
                 )
                 // Accept access tokens for User Info and/or Client Registration
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
-
-
         return http.cors(Customizer.withDefaults()).build();
     }
 
@@ -59,12 +55,14 @@ public class SecurityConfig {
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                // Form login handles the redirect to the login page from the
-                // authorization server filter chain
+                .headers(headers -> headers
+                        .contentSecurityPolicy(policy -> policy
+                                .policyDirectives("frame-ancestors 'self' http://localhost:5173;")
+                        )
+                )
                 .oauth2Login(a -> a
-                                .loginPage("/login")
-                                .permitAll()
-                        // .redirectionEndpoint(b->b.baseUri("/callback"))
+                        .loginPage("/login")
+                        .permitAll()
                 );
 
         return http.cors(Customizer.withDefaults()).build();

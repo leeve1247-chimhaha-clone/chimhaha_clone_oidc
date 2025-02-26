@@ -1,6 +1,7 @@
 package com.multirkh.chimhaha_clone_oidc.view;
 
 import jakarta.annotation.security.PermitAll;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +22,7 @@ public class LoginController {
     @GetMapping("image/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         try {
-            Path imagePath = Paths.get("src/main/resources/static/image/" + filename);
-            Resource image = new UrlResource(imagePath.toUri());
+            Resource image = new ClassPathResource("static/image/" + filename);
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filename + "\"")
                     .body(image);
